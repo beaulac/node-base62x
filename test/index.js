@@ -14,7 +14,8 @@ const correctedExamples = [
     ['A', 'G1'],
     ['Ab', 'GM2'],
     ['aBC', 'OK93'],
-    ['A__B*', 'GLx1VGYA']
+    ['A__B*', 'GLx1VGYA'],
+    ['Base62x比Base64的编码速度更快吗?', 'Gc5pPJOoUEQlb49XSsKsDEUQXEUzbkUWWUc0dx2MwfkQRjEMx3gx2MGbpF']
 ];
 
 describe('Reference Implementation', function () {
