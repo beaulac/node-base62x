@@ -14,5 +14,6 @@ const decode = require('./lib/decode');
 module.exports = {
     config,
     encode,
-    decode
+    decode: decode.decode,
+    decodeString: decode.decodeString
 };

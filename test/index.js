@@ -14,8 +14,10 @@ const correctedExamples = [
     ['A', 'G1'],
     ['Ab', 'GM2'],
     ['aBC', 'OK93'],
+    ['abcd', 'OM9ZP0'],
     ['A__B*', 'GLx1VGYA'],
-    ['Base62x比Base64的编码速度更快吗?', 'Gc5pPJOoUEQlb49XSsKsDEUQXEUzbkUWWUc0dx2MwfkQRjEMx3gx2MGbpF']
+    ['Base62x比Base64的编码速度更快吗?', 'Gc5pPJOoUEQlb49XSsKsDEUQXEUzbkUWWUc0dx2MwfkQRjEMx3gx2MGbpF'],
+    ['$*', 'xVbx']
 ];
 
 describe('Reference Implementation', function () {
@@ -63,7 +65,7 @@ describe('Base62x codec', function () {
 
         it('Decodes examples correctly', function () {
             correctedExamples.forEach(
-                ([expected, encoded]) => assert.strictEqual(B62xCodec.decode(encoded), expected)
+                ([expected, encoded]) => assert.strictEqual(B62xCodec.decodeString(encoded), expected)
             );
         });
     });
