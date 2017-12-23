@@ -1,5 +1,5 @@
 {
-  "name": "base-62x",
+  "name": "base62x",
   "version": "0.0.1",
   "description": "Node implementation of the base62x codec.",
   "main": "index.js",

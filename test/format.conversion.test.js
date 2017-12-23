@@ -10,26 +10,13 @@ const outputs = [
     'GLx1VGYA'
 ];
 
-describe('utf8array', function () {
-
-    it('matches reference', function () {
-        outputs.forEach(
-            str => assert.deepEqual(
-                RefB62x.toUTF8Array(str),
-                convert.toUTF8Array(str)
-            )
-        );
-    });
-    
-});
-
 describe('utf16array', function () {
 
     it('matches reference', function () {
         outputs.forEach(
             str => assert.deepEqual(
                 RefB62x.toUTF16Array(RefB62x.toUTF8Array(str)),
-                convert.toUTF16Array(convert.toUTF8Array(str))
+                convert.toUTF16Array(Buffer.from(str))
             )
         );
     });

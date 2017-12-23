@@ -11,48 +11,8 @@ const config = require('./lib/config');
 const encode = require('./lib/encode');
 const decode = require('./lib/decode');
 
-class Base62x {
-
-    //- constructor
-    constructor() {
-        //- @todo, refer, https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
-        this.isdebug = true;
-        this.config = config;
-    }
-
-    get xtag() {
-        return this.config.get('xtag');
-    }
-
-    //- methods, public
-    //- encode, statically
-    static encode(input, ibase) {
-        return encode(input, ibase);
-    }
-
-    //- decode, statically
-    static decode(input, obase) {
-        return decode(input, obase);
-    }
-
-    //- encode with instanceof
-    encode(input, ibase) {
-        return encode(input, ibase);
-    }
-
-    //- decode with instanceof
-    decode(input, obase) {
-        return decode(input, obase);
-    }
-
-    get(k) {
-        return config.get(k);
-    }
-
-    set(k, v) {
-        return config.set(k, v);
-    }
-
-}
-
-module.exports = Base62x;
+module.exports = {
+    config,
+    encode,
+    decode
+};
