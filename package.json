@@ -4,5 +4,9 @@
   "description": "Node implementation of the base62x codec.",
   "main": "index.js",
   "author": "Antoine Beauvais-Lacasse <antoine.beaulac@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/mocha": "^2.2.44",
+    "mocha": "^4.0.1"
+  }
 }
