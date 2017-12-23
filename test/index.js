@@ -49,3 +49,22 @@ describe('Reference Implementation', function () {
     });
 
 });
+
+describe('Base62x codec', function () {
+    const B62xCodec = require('..');
+
+    describe(' with corrected examples', function () {
+        it('Encodes examples correctly', function () {
+            correctedExamples.forEach(
+                ([input, expected]) => assert.strictEqual(B62xCodec.encode(input), expected)
+            );
+        });
+
+        it('Decodes examples correctly', function () {
+            correctedExamples.forEach(
+                ([expected, encoded]) => assert.strictEqual(B62xCodec.decode(encoded), expected)
+            );
+        });
+    });
+
+});
