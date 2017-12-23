@@ -20,7 +20,7 @@ describe('utf8array', function () {
             )
         );
     });
-
+    
 });
 
 describe('utf16array', function () {

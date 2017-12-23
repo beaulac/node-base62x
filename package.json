@@ -7,6 +7,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/mocha": "^2.2.44",
+    "@types/node": "^8.5.2",
     "mocha": "^4.0.1"
   }
 }
