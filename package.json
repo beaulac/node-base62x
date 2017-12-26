@@ -5,9 +5,13 @@
   "main": "index.js",
   "author": "Antoine Beauvais-Lacasse <antoine.beaulac@gmail.com>",
   "license": "ISC",
+  "scripts": {
+    "test": "mocha"
+  },
   "devDependencies": {
-    "@types/mocha": "^2.2.44",
+    "@types/mocha": "^2.2.45",
     "@types/node": "^8.5.2",
     "mocha": "^4.0.1"
-  }
+  },
+  "dependencies": {}
 }
