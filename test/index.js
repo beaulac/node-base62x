@@ -1,72 +1,62 @@
 'use strict';
 const assert = require('assert');
 
+const fixtures = require('./fixtures');
 
-// https://github.com/wadelau/Base62x/blob/master/base62x.presentation.201107.pdf
-const examples = [
-    // ['A', 'GG'], // Reference encodes as `G1`
-    // ['Ab', 'GM8'], // Reference encodes as `GM2`
-    ['aBC', 'OK93']
-    // ['A__B*', 'GLx1VGYe'] // Reference encodes as `GLx1VGYA`
-];
-
-const correctedExamples = [
-    ['A', 'G1'],
-    ['Ab', 'GM2'],
-    ['aBC', 'OK93'],
-    ['abcd', 'OM9ZP0'],
-    ['@#$%^', 'G2Ca9LE'],
-    ['A__B*', 'GLx1VGYA'],
-    ['Base62x比Base64的编码速度更快吗?', 'Gc5pPJOoUEQlb49XSsKsDEUQXEUzbkUWWUc0dx2MwfkQRjEMx3gx2MGbpF']
-];
-
-describe('Reference Implementation', function () {
-    const RefB62x = require('../original');
-
-    xdescribe(' with original examples', function () {
-        it('Encodes examples correctly', function () {
-            examples.forEach(
-                ([input, expected]) => assert.strictEqual(RefB62x.encode(input), expected)
-            );
-        });
-
-        it('Decodes examples correctly', function () {
-            examples.forEach(
-                ([expected, encoded]) => assert.strictEqual(RefB62x.decode(encoded), expected)
-            );
-        });
-    });
-
-    describe(' with corrected examples', function () {
-        it('Encodes examples correctly', function () {
-            correctedExamples.forEach(
-                ([input, expected]) => assert.strictEqual(RefB62x.encode(input), expected)
-            );
-        });
-
-        it('Decodes examples correctly', function () {
-            correctedExamples.forEach(
-                ([expected, encoded]) => assert.strictEqual(RefB62x.decode(encoded), expected)
-            );
-        });
-    });
-
-});
-
-describe('Base62x codec', function () {
+describe('Base62x Codec', function () {
     const B62xCodec = require('..');
 
-    describe(' with corrected examples', function () {
+    describe(' using default xtag', function () {
+
         it('Encodes examples correctly', function () {
-            correctedExamples.forEach(
+            fixtures.forEach(
                 ([input, expected]) => assert.strictEqual(B62xCodec.encode(input), expected)
             );
         });
 
         it('Decodes examples correctly', function () {
-            correctedExamples.forEach(
+            fixtures.forEach(
+                ([expected, encoded]) => assert.strictEqual(
+                    Buffer.from(expected).compare(B62xCodec.decode(encoded)), 0)
+            );
+        });
+
+        it('Decodes examples correctly as strings', function () {
+            fixtures.forEach(
                 ([expected, encoded]) => assert.strictEqual(B62xCodec.decodeString(encoded), expected)
             );
+        });
+
+    });
+
+
+    describe(' using a custom xtag', function () {
+
+        describe(' (invalid)', function () {
+            it('refuses an invalid tag', function () {
+                try {
+                    B62xCodec.config.xtag = 'invalid';
+                    assert.fail('Should refuse this custom tag.');
+                } catch (e) {
+                    assert(e.message === `Invalid tag: "invalid"`);
+                }
+            });
+        });
+
+        describe(' (valid): ', function () {
+            [...B62xCodec.config.template].forEach(c => {
+                it(`accepts "${c}" as an xtag`, function () {
+                    B62xCodec.config.xtag = c;
+
+                    const input = Math.random().toString(36).slice(2);
+
+                    assert.strictEqual(
+                        B62xCodec.decodeString(B62xCodec.encode(input)),
+                        input
+                    );
+                });
+            });
+
         });
     });
 
