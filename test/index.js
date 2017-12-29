@@ -48,16 +48,25 @@ describe('Base62x Codec', function () {
                 it(`accepts "${c}" as an xtag`, function () {
                     B62xCodec.config.xtag = c;
 
-                    const input = Math.random().toString(36).slice(2);
+                    const input = randomBuffer();
 
                     assert.strictEqual(
-                        B62xCodec.decodeString(B62xCodec.encode(input)),
-                        input
+                        B62xCodec.decode(B62xCodec.encode(input)).compare(input),
+                        0
                     );
                 });
             });
 
         });
     });
+
+    function randomBuffer() {
+        const length = Math.ceil(100 * Math.random())
+            , buf = Buffer.allocUnsafe(length);
+        for (let i = 0; i < length; i++) {
+            buf[i] = Math.floor(0x100 * Math.random());
+        }
+        return buf;
+    }
 
 });
