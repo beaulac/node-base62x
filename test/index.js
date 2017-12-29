@@ -6,6 +6,35 @@ const fixtures = require('./fixtures');
 describe('Base62x Codec', function () {
     const B62xCodec = require('..');
 
+
+    describe(' invalid input', function () {
+        it('throws error on invalid decode input', function () {
+            try {
+                B62xCodec.decode('xaxaa');
+                assert.fail('Should refuse to decode this.');
+            } catch (e) {
+                assert(e.message === 'Invalid Base62x character: "xa"');
+            }
+        });
+
+        it('throws error on decode input with invalid length', function () {
+            try {
+                B62xCodec.decode('2');
+                assert.fail('Should refuse to decode this.');
+            } catch (e) {
+                assert(e.message === `Illegal base62x input: '2' at position 0`);
+            }
+        });
+
+        it('decodes empty buffer from empty input', function () {
+            assert.strictEqual(Buffer.compare(Buffer.alloc(0), B62xCodec.decode()), 0);
+        });
+
+        it('encodes empty input as empty string', function () {
+            assert.strictEqual(B62xCodec.encode(), '');
+        });
+    });
+
     describe(' using default xtag', function () {
 
         it('Encodes examples correctly', function () {
