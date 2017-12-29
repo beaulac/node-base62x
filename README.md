@@ -4,7 +4,7 @@
 
 This node implementation was inspired by [wadelau's polyglot Base62x repository](https://github.com/wadelau/Base62x).
 
-##Usage
+## Usage
 
 ```javascript
 var base62x = require('base62x');
@@ -14,13 +14,13 @@ var decodedBuffer = base62x.decode(encoded);
 var decodedString = base62x.decodeString(encoded);
 ```
 
-####Methods
+#### Methods
 
-#####encode(string | Buffer): string
-#####decode(string): Buffer
-#####decodeString(string): string
+##### encode(string | Buffer): string
+##### decode(string): Buffer
+##### decodeString(string): string
 
-##Config
+## Config
 
 Set the 'xtag' property to any alphanumeric value to choose it as the 'tag' value. The alphabet / lookup tables are automagically computed.
 ```javascript
