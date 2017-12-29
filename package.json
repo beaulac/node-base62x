@@ -1,6 +1,6 @@
 {
   "name": "base62x",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Node implementation of the base62x codec.",
   "main": "index.js",
   "author": "Antoine Beauvais-Lacasse <antoine.beaulac@gmail.com>",
@@ -8,6 +8,16 @@
   "scripts": {
     "test": "mocha",
     "coverage": "nyc mocha"
+  },
+  "keywords": [
+    "base62x",
+    "base64-variant",
+    "encoding",
+    "decoding"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beaulac/node-base62x.git"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.45",
