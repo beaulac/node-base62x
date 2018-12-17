@@ -74,7 +74,7 @@ describe('Base62x Codec', function () {
 
         describe(' (valid): ', function () {
             [...B62xCodec.config.template].forEach(c => {
-                it(`accepts "${c}" as an xtag`, function () {
+                it(`accepts "${ c }" as an xtag`, function () {
                     B62xCodec.config.xtag = c;
 
                     const input = randomBuffer();
@@ -87,6 +87,41 @@ describe('Base62x Codec', function () {
             });
 
         });
+    });
+
+    describe(' using empty strings and buffers', function () {
+
+        it('encodes empty buffer as empty string', function () {
+            assert.strictEqual(
+                B62xCodec.encode(Buffer.from([])),
+                ''
+            );
+        });
+
+        it('encodes empty string and buffer the same way', function () {
+            assert.strictEqual(
+                B62xCodec.encode(Buffer.from([])),
+                B62xCodec.encode('')
+            );
+        });
+
+        it('encodes null-byte string and buffer the same way', function () {
+            assert.strictEqual(
+                B62xCodec.encode(Buffer.from([0])),
+                B62xCodec.encode('\u0000')
+            );
+        });
+
+        it('decodes empty string as empty buffer', function () {
+            assert.strictEqual(
+                Buffer.compare(
+                    B62xCodec.decode(''),
+                    Buffer.alloc(0)
+                ),
+                0
+            );
+        });
+
     });
 
     function randomBuffer() {
